@@ -1,5 +1,6 @@
 ﻿
 using System;
+using PagueVeloz.Teste.Domain.Validations.Fornecedor;
 
 namespace PagueVeloz.Teste.Domain.Commands
 {
@@ -17,7 +18,8 @@ namespace PagueVeloz.Teste.Domain.Commands
 
         public override bool IsValid()
         {
-            return true;
+            ValidationResult = new VincularFornecedorEmpresaCommandValidation().Validate(this);
+            return ValidationResult.IsValid;
         }
     }
 }
