@@ -1,4 +1,6 @@
-﻿namespace PagueVeloz.Teste.Domain
+﻿using System;
+
+namespace PagueVeloz.Teste.Domain
 {
     public struct CpfStruct
     {

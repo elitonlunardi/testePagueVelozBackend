@@ -8,6 +8,7 @@ namespace PagueVeloz.Teste.Application.ViewModels
         public Guid Id { get; set; }
         public Guid IdEmpresa { get; set; }
         public string Nome { get; set; }
-        public Documento Documento { get; set; }
+        public string Documento { get; set; }
+        public string DataCadastro { get; set; }
     }
 }

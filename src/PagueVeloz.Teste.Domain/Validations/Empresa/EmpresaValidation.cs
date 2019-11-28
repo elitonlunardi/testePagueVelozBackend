@@ -16,13 +16,6 @@ namespace PagueVeloz.Teste.Domain
                 .WithMessage("O nome da empresa não pode ter mais que 150 caractéres.");
         }
 
-        protected void ValidateCnpj()
-        {
-            RuleFor(e => e.Cnpj)
-                .Must(m => m.EhValido)
-                .WithMessage("Cnpj da empresa precisa ser válido");
-        }
-
         protected void ValidateUf()
         {
             RuleFor(e => e.Uf)

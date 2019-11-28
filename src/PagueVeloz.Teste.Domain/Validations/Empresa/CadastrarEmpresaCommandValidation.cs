@@ -8,7 +8,6 @@ namespace PagueVeloz.Teste.Domain
         public CadastrarEmpresaCommandValidation()
         {
             CascadeMode = CascadeMode.StopOnFirstFailure;
-            ValidateCnpj();
             ValidateNomeFantasia();
             ValidateUf();
         }

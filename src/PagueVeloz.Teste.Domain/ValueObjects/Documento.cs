@@ -11,7 +11,7 @@ namespace PagueVeloz.Teste.Domain
         private Documento(string value)
         {
             Value = value;
-            if (Value.Length == 14)
+            if (Value.Length == 11)
             {
                 CpfStruct cpf = value;
                 TipoPessoa = TipoPessoa.Fisica;

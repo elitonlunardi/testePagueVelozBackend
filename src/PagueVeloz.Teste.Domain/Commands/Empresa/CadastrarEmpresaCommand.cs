@@ -2,7 +2,7 @@
 {
     public class CadastrarEmpresaCommand : EmpresaCommand
     {
-        public CadastrarEmpresaCommand(string nomeFantasia, Cnpj cnpj, string uf)
+        public CadastrarEmpresaCommand(string nomeFantasia, string cnpj, string uf)
         {
             NomeFantasia = nomeFantasia;
             Cnpj = cnpj;

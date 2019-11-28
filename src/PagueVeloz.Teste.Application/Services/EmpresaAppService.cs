@@ -54,10 +54,11 @@ namespace PagueVeloz.Teste.Application
                 .Select(forn =>
                 new FornecedorViewModel
                 {
-                    Documento = forn.Documento,
+                    Documento = forn.Documento.Value,
                     Id = forn.Id,
                     IdEmpresa = forn.IdEmpresa,
-                    Nome = forn.Nome
+                    Nome = forn.Nome,
+                    DataCadastro = forn.DataCadastro.ToString("dd/mm/yyyy")
                 }).ToList();
         }
     }
