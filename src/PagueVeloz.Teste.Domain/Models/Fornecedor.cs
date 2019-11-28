@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PagueVeloz.Teste.Domain.Core;
+using PagueVeloz.Teste.Domain.Exceptions;
 
 namespace PagueVeloz.Teste.Domain
 {
@@ -51,17 +52,18 @@ namespace PagueVeloz.Teste.Domain
         /// </summary>
         public DateTime DataCadastro { get; private set; }
 
-        ///// <summary>
+        /// <summary>
         /// Coleção de telefones do fornecedor.
         /// </summary>
         public ICollection<Telefone> Telefones { get; private set; }
 
         public Fornecedor(Empresa empresa, string nome, Rg rg, DataNascimento dataNascimento, Documento documento, Telefone telefone)
         {
+            if (!documento.EhValido) throw  new DomainException("O documento não é valido.");
+            Documento = documento;
             Empresa = empresa;
             Rg = rg;
             DataNascimento = dataNascimento;
-            Documento = documento;
 
             Nome = nome;
             DataCadastro = DateTime.Now;
@@ -77,15 +79,15 @@ namespace PagueVeloz.Teste.Domain
         {
             if (Telefones == null)
                 Telefones = new List<Telefone>();
+
             Telefones.Add(tel);
         }
 
         /// <summary>
         /// Verificação se o fornecedor é maior de idade.
-        /// </summary>
+        /// </summary>c
         /// <returns>True se for maior de idade, false caso contrário.</returns>
-        //public bool EhMaiorIdade() => (DateTime.Now.Year - DataNascimento.Value.Year) > 18;
-        public bool EhMaiorIdade() => true;/*(DateTime.Now.Year - ) > 18;*/
+        public bool EhMaiorIdade() => (DateTime.Now.Year - DataNascimento.Value.Year) > 18;
 
         /// <summary>
         /// Verificação do tipo da pessoa.

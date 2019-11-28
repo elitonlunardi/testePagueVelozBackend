@@ -8,6 +8,10 @@ namespace PagueVeloz.Teste.Domain
         public readonly bool EhValido;
         private CpfStruct(string value)
         {
+            try
+            {
+
+            
             _value = value;
 
             if (value == null)
@@ -84,6 +88,13 @@ namespace PagueVeloz.Teste.Domain
                 : 11 - digito2;
 
             EhValido = dv2 == digito2;
+            _value = long.Parse(_value).ToString(@"00\.000\.000\/0000\-00");
+            }
+            catch (Exception )
+            {
+                EhValido = false;
+                _value = "";
+            }
         }
 
         public static implicit operator CpfStruct(string value)

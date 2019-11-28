@@ -18,6 +18,10 @@ namespace PagueVeloz.Teste.Domain.Validations.Fornecedor
             RuleFor(f => f.Nome)
                 .NotEmpty()
                 .WithMessage("É necessário um nome para vincular um fornecedor.");
+
+            RuleFor(f => f.Nome)
+                .MaximumLength(150)
+                .WithMessage("O nome do fornecedor deve ter no máximo 150 caractéres");
         }
 
         protected void ValidateDocumento()
@@ -32,6 +36,13 @@ namespace PagueVeloz.Teste.Domain.Validations.Fornecedor
             RuleFor(f => f.Telefone)
                 .NotEmpty()
                 .WithMessage("É necessário um telefone para vincular um fornecedor");
+        }
+
+        protected void ValidateRg()
+        {
+            RuleFor(f => f.Rg.Value)
+                .MaximumLength(10)
+                .WithMessage("O RG deve ter no máximo 10 caractéres");
         }
     }
 }
