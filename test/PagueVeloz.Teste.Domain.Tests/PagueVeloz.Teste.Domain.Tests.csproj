@@ -21,8 +21,4 @@
     <ProjectReference Include="..\..\src\PagueVeloz.Teste.Domain\PagueVeloz.Teste.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Fornecedor\" />
-  </ItemGroup>
-
 </Project>

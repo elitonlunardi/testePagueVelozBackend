@@ -49,7 +49,8 @@ namespace PagueVeloz.Teste.Application
 
         public ICollection<FornecedorViewModel> ObterFornecedores(Guid idEmpresa)
         {
-            return _empresaRepository.GetByIdIncludeFornecedor(idEmpresa)
+            return
+            _empresaRepository.GetByIdIncludeFornecedor(idEmpresa)
                 .Fornecedores
                 .Select(forn =>
                 new FornecedorViewModel
@@ -58,7 +59,7 @@ namespace PagueVeloz.Teste.Application
                     Id = forn.Id,
                     IdEmpresa = forn.IdEmpresa,
                     Nome = forn.Nome,
-                    DataCadastro = forn.DataCadastro.ToString("dd/mm/yyyy")
+                    DataCadastro = forn.DataCadastro.ToString("dd/MM/yyyy")
                 }).ToList();
         }
     }

@@ -9,7 +9,6 @@ namespace PagueVeloz.Teste.Infra.Data
         {
             optionsBuilder.UseSqlServer
             (@"Server=localhost;Database=PagueVelozTeste;Integrated Security=True");
-            optionsBuilder.EnableSensitiveDataLogging();
             base.OnConfiguring(optionsBuilder);
         }
 

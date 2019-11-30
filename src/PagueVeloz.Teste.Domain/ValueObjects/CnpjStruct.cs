@@ -73,7 +73,9 @@ namespace PagueVeloz.Teste.Domain
 
                 EhValido = cnpj.EndsWith(digito);
                 _value = cnpj;
-                //_value = long.Parse(_value).ToString(@"00\.000\.000\/0000\-00");
+                _value = long.Parse(_value).ToString(@"00\.000\.000\/0000\-00");
+                var a = 1 + 1;
+                //34.765.851/0001-47
             }
             catch (Exception)
             {

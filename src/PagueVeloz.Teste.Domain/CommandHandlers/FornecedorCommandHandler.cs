@@ -35,7 +35,6 @@ namespace PagueVeloz.Teste.Domain
                 }
 
                 var empresa = _empresaRepository.GetByIdIncludeFornecedor(request.IdEmpresa);
-
                 empresa.VincularFornecedor(new Fornecedor(empresa, request.Nome, request.Rg, request.DataNascimento, request.Documento, new Telefone(request.Telefone)));
 
                 return Task.FromResult(Commit());

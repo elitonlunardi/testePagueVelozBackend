@@ -1,4 +1,5 @@
-﻿using PagueVeloz.Teste.Domain.Core;
+﻿using System.Text.RegularExpressions;
+using PagueVeloz.Teste.Domain.Core;
 
 namespace PagueVeloz.Teste.Domain
 {
@@ -10,10 +11,10 @@ namespace PagueVeloz.Teste.Domain
 
         private Documento(string value)
         {
-            Value = value;
-            if (Value.Length == 11 || Value.Length == 14)
+            Value = value.Replace(".","").Replace("-", "").Replace("/", "");
+            if (Value.Length == 11)
             {
-                CpfStruct cpf = value;
+                CpfStruct cpf = Value;
                 TipoPessoa = TipoPessoa.Fisica;
                 if (cpf.EhValido)
                 {
