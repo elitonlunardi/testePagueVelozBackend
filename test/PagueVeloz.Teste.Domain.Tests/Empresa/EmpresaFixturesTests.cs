@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Bogus;
+using Bogus.DataSets;
 using Bogus.Extensions.Brazil;
 using Xunit;
 
@@ -33,23 +34,76 @@ namespace PagueVeloz.Teste.Domain.Tests
 
             return fakerEmpresa.Generate(quantidade);
         }
-
-        public IEnumerable<Fornecedor> ObterFornecedorValido(Empresa empresa, int quantidade = 1)
+        public IEnumerable<Empresa> ObterEmpresaValida(string uf, int quantidade = 1)
         {
-            var docs = new List<string>(2) { _faker.Person.Cpf(), _faker.Company.Cnpj() };
+            var fakerEmpresa = new Faker<Empresa>("pt_BR")
+                .CustomInstantiator(f => new Empresa(
+                    f.Company.CompanyName(),
+                    ObterCnpjValido(),
+                    uf));
+
+            return fakerEmpresa.Generate(quantidade);
+        }
+        public IEnumerable<Fornecedor> ObterFornecedorValido(Empresa empresa, string rg,
+            int quantidade = 1)
+        {
 
             var faker = new Faker<Fornecedor>()
                 .CustomInstantiator(f => new Fornecedor
-                    (
-                        empresa,
-                        f.Person.Company.Name,
-                        "5.267.803",
-                        f.Person.DateOfBirth,
-                        _faker.PickRandom(docs),
-                        new Telefone(f.Phone.PhoneNumber())
+                (
+                    empresa,
+                    f.Person.Company.Name,
+                    rg,
+                    DateTime.Now.AddYears(-20),
+                    ObterDocumentoValido(),
+                    new Telefone(f.Phone.PhoneNumber())
                 ));
 
             return faker.Generate(quantidade);
         }
+
+        public IEnumerable<Fornecedor> ObterFornecedorParanaValido(Empresa empresa, string rg, int quantidade = 1)
+        {
+            var faker = new Faker<Fornecedor>()
+                .CustomInstantiator(f => new Fornecedor
+                (
+                    empresa,
+                    f.Person.Company.Name,
+                    rg,
+                    DateTime.Now.AddYears(-20),
+                    ObterDocumentoValido(),
+                    new Telefone(f.Phone.PhoneNumber())
+                ));
+
+            return faker.Generate(quantidade);
+        }
+
+        public IEnumerable<Fornecedor> ObterFornecedorParanaInvalido(Empresa empresa, string rg, int quantidade = 1)
+        {
+            var dataNascimento = _faker.Date.Past(17, DateTime.Now);
+            var doc = ObterCpfValido();
+
+            var faker = new Faker<Fornecedor>()
+                .CustomInstantiator(f => new Fornecedor
+                (
+                    empresa,
+                    f.Person.Company.Name,
+                    rg,
+                    dataNascimento,
+                    doc,
+                    new Telefone(f.Phone.PhoneNumber())
+                ));
+
+            return faker.Generate(quantidade);
+        }
+
+
+        private string ObterDocumentoValido()
+        {
+            var docs = new List<string>(2) { _faker.Person.Cpf(), _faker.Company.Cnpj() };
+            return _faker.PickRandom(docs);
+        }
+        private string ObterCpfValido() => _faker.Person.Cpf();
+        private string ObterCnpjValido() => _faker.Company.Cnpj();
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
+using PagueVeloz.Teste.Domain.Exceptions;
 using PagueVeloz.Teste.Domain.Tests;
 using Xunit;
 
@@ -35,10 +37,40 @@ namespace PagueVeloz.Teste.Domain
             var empresa = _empresaFixturesTests.ObterEmpresaValida().FirstOrDefault();
 
             //Act
-            empresa.VincularFornecedor(_empresaFixturesTests.ObterFornecedorValido(empresa).FirstOrDefault());
+            empresa.VincularFornecedor(_empresaFixturesTests.ObterFornecedorValido(empresa, "5123213").FirstOrDefault());
 
             //Assert
             empresa.Fornecedores.Should().HaveCount(1, " o fornecedor deve ser vinculado com sucesso.");
+        }
+
+        [Fact]
+        [Trait("Categoria", "Empresa testes")]
+        public void Empresa_VincularFornecedorParanaMenorIdade_DeveFalhar()
+        {
+            //Arrange 
+            var empresa = _empresaFixturesTests.ObterEmpresaValida("PR").FirstOrDefault();
+            var fornecedor = _empresaFixturesTests.ObterFornecedorParanaInvalido(empresa, "5.726.803").FirstOrDefault();
+
+            //Act & Assert 
+            empresa.Invoking(emp => emp.VincularFornecedor(fornecedor))
+                .Should().Throw<DomainException>(
+                    " a empresa do paraná que o fornecedor é pessoa física deve ser maior de idade");
+        }
+
+        [Fact]
+        [Trait("Categoria", "Empresa testes")]
+        public void Empresa_VincularFornecedorParanaMaiorIdade_DeveExecutarSucesso()
+        {
+            //Arrange 
+            var empresa = _empresaFixturesTests.ObterEmpresaValida("PR").FirstOrDefault();
+            var fornecedor = _empresaFixturesTests.ObterFornecedorValido(empresa, "5.726.803").FirstOrDefault();
+
+            //Act
+            empresa.VincularFornecedor(fornecedor);
+
+            //Assert
+            empresa.Fornecedores
+                .Should().HaveCount(1, "o fornecedor é válido");
         }
 
     }

@@ -55,6 +55,7 @@ namespace PagueVeloz.Teste.Domain
         /// <summary>
         /// Coleção de telefones do fornecedor.
         /// </summary>
+        /// <exception cref="DomainException">Se o documento não for válido</exception>
         public ICollection<Telefone> Telefones { get; private set; }
 
         public Fornecedor(Empresa empresa, string nome, Rg rg, DataNascimento dataNascimento, Documento documento, Telefone telefone)
