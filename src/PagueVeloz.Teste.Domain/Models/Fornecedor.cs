@@ -60,7 +60,7 @@ namespace PagueVeloz.Teste.Domain
 
         public Fornecedor(Empresa empresa, string nome, Rg rg, DataNascimento dataNascimento, Documento documento, Telefone telefone)
         {
-            if (!documento.EhValido) throw  new DomainException("O documento não é valido.");
+            if (!documento.EhValido) throw new DomainException("O documento não é valido.");
             Documento = documento;
             Empresa = empresa;
             Rg = rg;
@@ -88,7 +88,12 @@ namespace PagueVeloz.Teste.Domain
         /// Verificação se o fornecedor é maior de idade.
         /// </summary>c
         /// <returns>True se for maior de idade, false caso contrário.</returns>
-        public bool EhMaiorIdade() => (DateTime.Now.Year - DataNascimento.Value.Year) > 18;
+        public bool EhMaiorIdade()
+        {
+            if (DataNascimento.Value == new DateTime(1753, 01, 02)) return false;
+            var idade = DateTime.Now.Year - DataNascimento.Value.Year;
+            return idade > 18;
+        }
 
         /// <summary>
         /// Verificação do tipo da pessoa.

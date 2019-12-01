@@ -11,6 +11,11 @@ namespace PagueVeloz.Teste.Domain
         private DataNascimento(DateTime value)
         {
             Value = value;
+
+            if (Value == DateTime.MinValue)
+            {
+                Value = new DateTime(1753,01,02);
+            }
             //validar
         }
 

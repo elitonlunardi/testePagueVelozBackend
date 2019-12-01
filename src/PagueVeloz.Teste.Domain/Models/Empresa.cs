@@ -81,9 +81,9 @@ namespace PagueVeloz.Teste.Domain
 
             if (f.ObterTipoPessoa() == TipoPessoa.Fisica)
             {
-                if (f.Rg == null) throw new DomainException("O fornecedor pessoa física necessita de um RG para ser cadastrado.");
+                if (f.Rg == null || string.IsNullOrWhiteSpace(f.Rg.Value)) throw new DomainException("O fornecedor pessoa física necessita de um RG para ser cadastrado.");
 
-                if (f.DataNascimento == null) throw new DomainException("O fornecedor pessoa física necessita de uma data de nascimento para ser cadastrado.");
+                if (f.DataNascimento == null || f.DataNascimento.Value == DateTime.MinValue) throw new DomainException("O fornecedor pessoa física necessita de uma data de nascimento para ser cadastrado.");
             }
         }
 
