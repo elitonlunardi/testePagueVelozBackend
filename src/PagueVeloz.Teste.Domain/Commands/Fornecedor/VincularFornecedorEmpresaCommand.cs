@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using PagueVeloz.Teste.Domain.Validations.Fornecedor;
 
 namespace PagueVeloz.Teste.Domain.Commands

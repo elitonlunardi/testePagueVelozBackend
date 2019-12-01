@@ -5,6 +5,7 @@ namespace PagueVeloz.Teste.Domain.Commands
 {
     public abstract class FornecedorCommand : Command
     {
+        public Guid IdFornecedor { get; protected set; }
         public Guid IdEmpresa { get;  protected  set; }
         public string Nome { get; protected set; }
         public Rg Rg { get; protected set; }

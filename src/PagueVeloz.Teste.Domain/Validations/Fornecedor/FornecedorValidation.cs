@@ -6,11 +6,18 @@ namespace PagueVeloz.Teste.Domain.Validations.Fornecedor
 {
     public class FornecedorValidation<T> : AbstractValidator<T> where T : FornecedorCommand
     {
+        protected void ValidateIdFornecedor()
+        {
+            RuleFor(f => f.IdFornecedor)
+                .NotEmpty()
+                .WithMessage("É necessário um Id de um fornecedor para vincular um telefone.");
+        }
+
         protected void ValidateIdEmpresa()
         {
             RuleFor(f => f.IdEmpresa)
                 .NotEmpty()
-                .WithMessage("É necessário um Id de empresa para efetuar a vinculação de um fornecedor.");
+                .WithMessage("É necessário um Id de empresa para efetuar a operação.");
         }
 
         protected void ValidateNome()
@@ -35,7 +42,7 @@ namespace PagueVeloz.Teste.Domain.Validations.Fornecedor
         {
             RuleFor(f => f.Telefone)
                 .NotEmpty()
-                .WithMessage("É necessário um telefone para vincular um fornecedor");
+                .WithMessage("É necessário um telefone para vincular a um fornecedor");
         }
 
         protected void ValidateRg()

@@ -17,6 +17,7 @@ namespace PagueVeloz.Teste.Infra.CrossCutting.IoC
         {
             // Application
             services.AddScoped<IEmpresaAppService, EmpresaAppService>();
+            services.AddScoped<IFornecedorAppService, FornecedorAppService>();
 
             //Domain
             services.AddScoped<IEmpresaRepository, EmpresaRepository>();
@@ -28,6 +29,7 @@ namespace PagueVeloz.Teste.Infra.CrossCutting.IoC
             services.AddScoped<IRequestHandler<CadastrarEmpresaCommand, bool>, EmpresaCommandHandler>();
 
             services.AddScoped<IRequestHandler<VincularFornecedorEmpresaCommand, bool>, FornecedorCommandHandler>();
+            services.AddScoped<IRequestHandler<AdicionarTelefoneFornecedorCommand, bool>, FornecedorCommandHandler>();
 
 
             // Domain Bus (Mediator)
