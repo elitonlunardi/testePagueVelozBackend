@@ -10,5 +10,6 @@ namespace PagueVeloz.Teste.Application.ViewModels
         public string Nome { get; set; }
         public string Documento { get; set; }
         public string DataCadastro { get; set; }
+        public string Telefone { get; set; }
     }
 }

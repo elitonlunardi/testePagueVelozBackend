@@ -22,10 +22,16 @@ namespace PagueVeloz.Teste.Api.Controllers
         }
 
         [HttpPost("adicionar-telefone")]
-        public IActionResult Post(AdicionarTelefoneDto dto)
+        public IActionResult AdicionarTelefone(AdicionarTelefoneDto dto)
         {
             _fornecedorAppService.AdicionarTelefone(dto);
             return Response();
+        }
+
+        [HttpGet("obter-telefones")]
+        public IActionResult ObterTelefones(Guid idFornecedor)
+        {
+            return Response(_fornecedorAppService.ObterTelefones(idFornecedor));
         }
     }
 }

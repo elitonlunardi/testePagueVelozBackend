@@ -7,5 +7,6 @@ namespace PagueVeloz.Teste.Domain.Interfaces
     {
         Empresa GetByIdIncludeFornecedor(Guid id);
         ICollection<Empresa> Obter();
+        Fornecedor GetByIdFornecedor(Guid idFornecedor);
     }
 }

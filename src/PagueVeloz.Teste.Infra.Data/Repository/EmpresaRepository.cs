@@ -18,5 +18,12 @@ namespace PagueVeloz.Teste.Infra.Data
         public ICollection<Empresa> Obter() =>
             Set.AsNoTracking().ToList();
 
+        public Fornecedor GetByIdFornecedor(Guid idFornecedor)
+        {
+            var empresas = Set.Include(x => x.Fornecedores).ThenInclude(w => w.Telefones);
+            return Enumerable.FirstOrDefault(empresas.SelectMany(empresa => empresa.Fornecedores), fornecedor => fornecedor.Id.Equals(idFornecedor));
+        }
+
+
     }
 }
