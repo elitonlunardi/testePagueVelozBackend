@@ -19,9 +19,6 @@ namespace PagueVeloz.Teste.Domain
 
         protected override bool EqualsCore(Cnpj other) => Value.Equals(other.Value);
 
-        protected override int GetHashCodeCore()
-        {
-            return 0;
-        }
+        protected override int GetHashCodeCore() => 0;
     }
 }

@@ -13,18 +13,12 @@ namespace PagueVeloz.Teste.Domain
             Value = value;
 
             if (Value == DateTime.MinValue)
-            {
                 Value = new DateTime(1753,01,02);
-            }
-            //validar
         }
 
         public static implicit operator DataNascimento(DateTime data) => new DataNascimento(data);
         protected override bool EqualsCore(DataNascimento other) => Value.Equals(other.Value);
 
-        protected override int GetHashCodeCore()
-        {
-            return 0;
-        }
+        protected override int GetHashCodeCore() => 0;
     }
 }
