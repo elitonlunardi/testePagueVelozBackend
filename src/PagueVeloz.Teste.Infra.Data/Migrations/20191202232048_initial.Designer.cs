@@ -10,7 +10,7 @@ using PagueVeloz.Teste.Infra.Data;
 namespace PagueVeloz.Teste.Infra.Data.Migrations
 {
     [DbContext(typeof(PagueVelozContext))]
-    [Migration("20191110041137_initial")]
+    [Migration("20191202232048_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,16 +52,12 @@ namespace PagueVeloz.Teste.Infra.Data.Migrations
                         .HasColumnName("DataCadastro")
                         .HasColumnType("DateTime");
 
-                    b.Property<string>("DataNascimento")
-                        .HasColumnName("DataNascimento")
-                        .HasColumnType("varchar(10)");
-
                     b.Property<Guid>("IdEmpresa");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnName("Nome")
-                        .HasColumnType("VarChar")
+                        .HasColumnType("varchar(150)")
                         .HasMaxLength(150);
 
                     b.HasKey("Id");
@@ -69,6 +65,22 @@ namespace PagueVeloz.Teste.Infra.Data.Migrations
                     b.HasIndex("IdEmpresa");
 
                     b.ToTable("Fornecedor");
+                });
+
+            modelBuilder.Entity("PagueVeloz.Teste.Domain.Telefone", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("IdFornecedor");
+
+                    b.Property<string>("Numero");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdFornecedor");
+
+                    b.ToTable("Telefone");
                 });
 
             modelBuilder.Entity("PagueVeloz.Teste.Domain.Empresa", b =>
@@ -80,8 +92,8 @@ namespace PagueVeloz.Teste.Infra.Data.Migrations
                             b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasColumnName("Cnpj")
-                                .HasColumnType("varchar(14)")
-                                .HasMaxLength(14);
+                                .HasColumnType("varchar(19)")
+                                .HasMaxLength(19);
 
                             b1.HasKey("EmpresaId");
 
@@ -101,15 +113,37 @@ namespace PagueVeloz.Teste.Infra.Data.Migrations
                         .HasForeignKey("IdEmpresa")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.OwnsOne("PagueVeloz.Teste.Domain.DataNascimento", "DataNascimento", b1 =>
+                        {
+                            b1.Property<Guid>("FornecedorId");
+
+                            b1.Property<DateTime>("Value")
+                                .HasColumnName("DataNascimento")
+                                .HasColumnType("DateTime2");
+
+                            b1.HasKey("FornecedorId");
+
+                            b1.ToTable("Fornecedor");
+
+                            b1.HasOne("PagueVeloz.Teste.Domain.Fornecedor")
+                                .WithOne("DataNascimento")
+                                .HasForeignKey("PagueVeloz.Teste.Domain.DataNascimento", "FornecedorId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
+
                     b.OwnsOne("PagueVeloz.Teste.Domain.Documento", "Documento", b1 =>
                         {
                             b1.Property<Guid>("FornecedorId");
 
+                            b1.Property<short>("TipoPessoa")
+                                .HasColumnName("TipoPessoa")
+                                .HasColumnType("smallint");
+
                             b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasColumnName("Documento")
-                                .HasColumnType("VarChar")
-                                .HasMaxLength(15);
+                                .HasColumnType("varchar(20)")
+                                .HasMaxLength(20);
 
                             b1.HasKey("FornecedorId");
 
@@ -127,7 +161,7 @@ namespace PagueVeloz.Teste.Infra.Data.Migrations
 
                             b1.Property<string>("Value")
                                 .HasColumnName("Rg")
-                                .HasColumnType("VarChar")
+                                .HasColumnType("varchar(10)")
                                 .HasMaxLength(10);
 
                             b1.HasKey("FornecedorId");
@@ -139,6 +173,14 @@ namespace PagueVeloz.Teste.Infra.Data.Migrations
                                 .HasForeignKey("PagueVeloz.Teste.Domain.Rg", "FornecedorId")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
+                });
+
+            modelBuilder.Entity("PagueVeloz.Teste.Domain.Telefone", b =>
+                {
+                    b.HasOne("PagueVeloz.Teste.Domain.Fornecedor", "Fornecedor")
+                        .WithMany("Telefones")
+                        .HasForeignKey("IdFornecedor")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

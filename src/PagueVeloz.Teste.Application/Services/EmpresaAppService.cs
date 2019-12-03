@@ -32,13 +32,14 @@ namespace PagueVeloz.Teste.Application
             _mediator.SendCommand(
                 new VincularFornecedorEmpresaCommand(cadastrarFornecedorDto.IdEmpresa,
                 cadastrarFornecedorDto.Nome,
-                cadastrarFornecedorDto.Rg, cadastrarFornecedorDto.DataNascimento, cadastrarFornecedorDto.Documento,
+                cadastrarFornecedorDto.Rg, cadastrarFornecedorDto.DataNascimento ?? DateTime.MinValue, cadastrarFornecedorDto.Documento,
                 cadastrarFornecedorDto.Telefone));
         }
 
         public ICollection<EmpresaViewModel> Obter()
         {
-            return _empresaRepository.Obter().Select(emp => new EmpresaViewModel
+            return _empresaRepository.Obter()
+                .Select(emp => new EmpresaViewModel
             {
                 Id = emp.Id,
                 Cnpj = emp.Cnpj.ToString(),

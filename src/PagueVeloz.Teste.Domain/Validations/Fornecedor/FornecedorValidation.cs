@@ -43,6 +43,14 @@ namespace PagueVeloz.Teste.Domain.Validations.Fornecedor
             RuleFor(f => f.Telefone)
                 .NotEmpty()
                 .WithMessage("É necessário um telefone para vincular a um fornecedor");
+
+            RuleFor(f => f.Telefone)
+                .MinimumLength(7)
+                .WithMessage("É necessário no mínimo 7 números para o telefone");
+
+            RuleFor(f => f.Telefone)
+                .MaximumLength(12)
+                .WithMessage("É permitido no máximo 10 números para o telefone");
         }
 
         protected void ValidateRg()

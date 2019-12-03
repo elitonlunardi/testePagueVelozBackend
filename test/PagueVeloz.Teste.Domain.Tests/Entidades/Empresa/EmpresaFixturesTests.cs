@@ -103,7 +103,7 @@ namespace PagueVeloz.Teste.Domain.Tests
             var docs = new List<string>(2) { _faker.Person.Cpf(), _faker.Company.Cnpj() };
             return _faker.PickRandom(docs);
         }
-        private string ObterCpfValido() => _faker.Person.Cpf();
-        private string ObterCnpjValido() => _faker.Company.Cnpj();
+        public string ObterCpfValido() => _faker.Person.Cpf();
+        public string ObterCnpjValido() => _faker.Company.Cnpj();
     }
 }

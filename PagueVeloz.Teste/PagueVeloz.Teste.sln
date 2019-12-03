@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PagueVeloz.Teste.Domain.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PagueVeloz.Teste.Domain.Tests", "..\test\PagueVeloz.Teste.Domain.Tests\PagueVeloz.Teste.Domain.Tests.csproj", "{A792EA33-D7F7-43CD-B75F-7BB18C9CC517}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PagueVeloz.Teste.Infra.CrossCutting.Bus", "..\src\PagueVeloz.Teste.Infra.CrossCutting.Bus\PagueVeloz.Teste.Infra.CrossCutting.Bus.csproj", "{C0CF3FB5-BD53-4584-9D98-77AAFE87E4B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PagueVeloz.Teste.Infra.CrossCutting.Bus", "..\src\PagueVeloz.Teste.Infra.CrossCutting.Bus\PagueVeloz.Teste.Infra.CrossCutting.Bus.csproj", "{C0CF3FB5-BD53-4584-9D98-77AAFE87E4B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

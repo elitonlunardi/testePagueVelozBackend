@@ -17,7 +17,7 @@ namespace PagueVeloz.Teste.Domain
         }
 
 
-        [Fact]
+        [Fact(DisplayName = "Criação de empresa deve executar com sucesso")]
         [Trait("Categoria", "Empresa testes")]
         public void Empresa_Criar_DeveExecutarComSucesso()
         {
@@ -29,7 +29,7 @@ namespace PagueVeloz.Teste.Domain
             empresa.Fornecedores.Should().BeNull("Construtor não espera um fornecedor");
         }
 
-        [Fact]
+        [Fact(DisplayName = "Vinculação de fornecedor deve executar com sucesso")]
         [Trait("Categoria", "Empresa testes")]
         public void Empresa_VincularFornecedor_DeveExecutarComSucesso()
         {
@@ -43,7 +43,7 @@ namespace PagueVeloz.Teste.Domain
             empresa.Fornecedores.Should().HaveCount(1, " o fornecedor deve ser vinculado com sucesso.");
         }
 
-        [Fact]
+        [Fact(DisplayName = "Vinculação de fornecedor do paraná menor de idade deve falhar")]
         [Trait("Categoria", "Empresa testes")]
         public void Empresa_VincularFornecedorParanaMenorIdade_DeveFalhar()
         {
@@ -57,7 +57,7 @@ namespace PagueVeloz.Teste.Domain
                     " a empresa do paraná que o fornecedor é pessoa física deve ser maior de idade");
         }
 
-        [Fact]
+        [Fact(DisplayName = "Vinculação de fornecedor do paraná maior de idade deve executar com sucesso")]
         [Trait("Categoria", "Empresa testes")]
         public void Empresa_VincularFornecedorParanaMaiorIdade_DeveExecutarSucesso()
         {

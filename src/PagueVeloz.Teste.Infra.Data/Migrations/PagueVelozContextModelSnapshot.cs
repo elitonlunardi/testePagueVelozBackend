@@ -117,7 +117,7 @@ namespace PagueVeloz.Teste.Infra.Data.Migrations
 
                             b1.Property<DateTime>("Value")
                                 .HasColumnName("DataNascimento")
-                                .HasColumnType("DateTime");
+                                .HasColumnType("DateTime2");
 
                             b1.HasKey("FornecedorId");
 

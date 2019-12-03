@@ -32,6 +32,7 @@ namespace PagueVeloz.Teste.Application
 
             var telefoneModel = telefones?.Select(forn => new FornecedorViewModel
             {
+                Id = forn.Id,
                 Telefone = forn.Numero
             }).ToList();
 

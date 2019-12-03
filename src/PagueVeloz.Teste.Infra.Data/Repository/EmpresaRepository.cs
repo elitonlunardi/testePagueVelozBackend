@@ -20,8 +20,16 @@ namespace PagueVeloz.Teste.Infra.Data
 
         public Fornecedor GetByIdFornecedor(Guid idFornecedor)
         {
-            var empresas = Set.Include(x => x.Fornecedores).ThenInclude(w => w.Telefones);
-            return Enumerable.FirstOrDefault(empresas.SelectMany(empresa => empresa.Fornecedores), fornecedor => fornecedor.Id.Equals(idFornecedor));
+            var empresas = Set.AsNoTracking().Include(x => x.Fornecedores).ThenInclude(w => w.Telefones);
+            foreach (var empresa in empresas)
+            {
+                foreach (var fornecedor in empresa.Fornecedores)
+                {
+                    if (fornecedor.Id == idFornecedor)
+                        return fornecedor;
+                }
+            }
+            return null;
         }
 
 
